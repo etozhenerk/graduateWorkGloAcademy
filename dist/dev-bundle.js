@@ -43,7 +43,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _mod
 /***/ }),
 
 /***/ "./src/modules/togglePopUp.js":
-/*!************************************!*\
+/*!************************************!*\ 
   !*** ./src/modules/togglePopUp.js ***!
   \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
