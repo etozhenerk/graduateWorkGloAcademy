@@ -38,7 +38,7 @@ eval("\nmodule.exports = function () {\n\treturn /[\\u001b\\u009b][[()#;?]*(?:[0
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_togglePopUp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/togglePopUp */ \"./src/modules/togglePopUp.js\");\n\n\n\n(0,_modules_togglePopUp__WEBPACK_IMPORTED_MODULE_0__.default)();\n\n//# sourceURL=webpack://graduateWork/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_togglePopUp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/togglePopUp */ \"./src/modules/togglePopUp.js\");\n/* harmony import */ var _modules_topMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/topMenu */ \"./src/modules/topMenu.js\");\n\n\n\n\n(0,_modules_togglePopUp__WEBPACK_IMPORTED_MODULE_0__.default)();\n(0,_modules_topMenu__WEBPACK_IMPORTED_MODULE_1__.default)();\n\n//# sourceURL=webpack://graduateWork/./src/index.js?");
 
 /***/ }),
 
@@ -50,6 +50,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _mod
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\nvar togglePopUp = function togglePopUp() {\n  var callbackBtn = document.querySelectorAll(\".callback-btn\"),\n      modalOverlay = document.querySelector(\".modal-overlay\"),\n      modalCallback = document.querySelector(\".modal-callback\"),\n      body = document.querySelector(\"body\");\n  callbackBtn.forEach(function (btn) {\n    btn.addEventListener(\"click\", function (e) {\n      e.preventDefault();\n      modalOverlay.style.display = \"block\";\n      modalCallback.style.display = \"block\";\n    });\n  });\n  body.addEventListener(\"click\", function (e) {\n    var target = e.target;\n\n    if (target.closest(\".modal-close\") || target.matches(\".modal-overlay\")) {\n      modalOverlay.style.display = \"none\";\n      modalCallback.style.display = \"none\";\n    }\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (togglePopUp);\n\n//# sourceURL=webpack://graduateWork/./src/modules/togglePopUp.js?");
+
+/***/ }),
+
+/***/ "./src/modules/topMenu.js":
+/*!********************************!*\
+  !*** ./src/modules/topMenu.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\nvar animateTopMenu = function animateTopMenu() {\n  var topMenu = document.querySelector(\".top-menu\");\n  topMenu.addEventListener(\"click\", function (e) {\n    var target = e.target;\n\n    if (target.matches(\"a\")) {\n      e.preventDefault();\n      var blockID = target.getAttribute(\"href\");\n      var block = document.querySelector(blockID);\n      block.scrollIntoView({\n        behavior: \"smooth\",\n        block: \"start\"\n      });\n    }\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (animateTopMenu);\n\n//# sourceURL=webpack://graduateWork/./src/modules/topMenu.js?");
 
 /***/ }),
 
@@ -444,7 +455,7 @@ eval("var map = {\n\t\"./log\": \"./node_modules/webpack/hot/log.js\"\n};\n\n\nf
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => "f441e847d8be6f6d955a"
+/******/ 		__webpack_require__.h = () => "7b76493494ff7383d086"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
