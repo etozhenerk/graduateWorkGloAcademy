@@ -38,12 +38,23 @@ eval("\nmodule.exports = function () {\n\treturn /[\\u001b\\u009b][[()#;?]*(?:[0
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_togglePopUp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/togglePopUp */ \"./src/modules/togglePopUp.js\");\n/* harmony import */ var _modules_topMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/topMenu */ \"./src/modules/topMenu.js\");\n\n\n\n\n(0,_modules_togglePopUp__WEBPACK_IMPORTED_MODULE_0__.default)();\n(0,_modules_topMenu__WEBPACK_IMPORTED_MODULE_1__.default)();\n\n//# sourceURL=webpack://graduateWork/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_togglePopUp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/togglePopUp */ \"./src/modules/togglePopUp.js\");\n/* harmony import */ var _modules_topMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/topMenu */ \"./src/modules/topMenu.js\");\n/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/slider */ \"./src/modules/slider.js\");\n\n\n\n\n\n(0,_modules_togglePopUp__WEBPACK_IMPORTED_MODULE_0__.default)();\n(0,_modules_topMenu__WEBPACK_IMPORTED_MODULE_1__.default)();\n(0,_modules_slider__WEBPACK_IMPORTED_MODULE_2__.default)();\n\n//# sourceURL=webpack://graduateWork/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/modules/slider.js":
+/*!*******************************!*\
+  !*** ./src/modules/slider.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\nvar slider = function slider() {\n  var slides = document.querySelectorAll(\".item\"),\n      slider = document.querySelector(\".top-slider\");\n  var dots = document.createElement(\"div\");\n  dots.classList.add(\"slick-dots\");\n  slider.append(dots);\n\n  for (var i = 0; i < slides.length; i++) {\n    var _dot = document.createElement(\"li\");\n\n    if (i === 0) {\n      _dot.classList.add(\"slick-active\");\n    }\n\n    dots.append(_dot);\n  }\n\n  var dot = dots.querySelectorAll(\"li\");\n  var currentSlide = 0,\n      interval;\n\n  var prevSlide = function prevSlide(elem, index, strSlide) {\n    if (strSlide) {\n      elem[index].classList.remove(strSlide);\n    } else {\n      elem[index].style.display = \"none\";\n    }\n  };\n\n  var nextSlide = function nextSlide(elem, index, strSlide) {\n    if (strSlide) {\n      elem[index].classList.add(strSlide);\n    } else {\n      elem[index].style.display = \"block\";\n    }\n  };\n\n  var autoPlaySlide = function autoPlaySlide() {\n    prevSlide(slides, currentSlide);\n    prevSlide(dot, currentSlide, \"slick-active\");\n    currentSlide++;\n\n    if (currentSlide >= slides.length) {\n      currentSlide = 0;\n    }\n\n    nextSlide(slides, currentSlide);\n    nextSlide(dot, currentSlide, \"slick-active\");\n  };\n\n  var startSlide = function startSlide() {\n    var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 3000;\n    interval = setInterval(autoPlaySlide, time);\n  };\n\n  var stopSlide = function stopSlide() {\n    clearInterval(interval);\n  };\n\n  slider.addEventListener(\"click\", function (e) {\n    var target = e.target;\n\n    if (target.tagName === \"LI\") {\n      prevSlide(slides, currentSlide);\n      prevSlide(dot, currentSlide, \"slick-active\");\n      dot.forEach(function (elem, index) {\n        if (elem === target) {\n          currentSlide = index;\n        }\n      });\n\n      if (currentSlide >= slides.length) {\n        currentSlide = 0;\n      }\n\n      if (currentSlide < 0) {\n        currentSlide = slides.length - 1;\n      }\n\n      nextSlide(slides, currentSlide);\n      nextSlide(dot, currentSlide, \"slick-active\");\n    }\n  });\n  slider.addEventListener(\"mouseover\", function (e) {\n    if (e.target.tagName === \"LI\") {\n      stopSlide();\n    }\n  });\n  slider.addEventListener(\"mouseout\", function (e) {\n    if (e.target.tagName === \"LI\") {\n      startSlide();\n    }\n  });\n  startSlide();\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (slider);\n\n//# sourceURL=webpack://graduateWork/./src/modules/slider.js?");
 
 /***/ }),
 
 /***/ "./src/modules/togglePopUp.js":
-/*!************************************!*\ 
+/*!************************************!*\
   !*** ./src/modules/togglePopUp.js ***!
   \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -455,7 +466,7 @@ eval("var map = {\n\t\"./log\": \"./node_modules/webpack/hot/log.js\"\n};\n\n\nf
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => "7b76493494ff7383d086"
+/******/ 		__webpack_require__.h = () => "105c848007947efd155b"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
