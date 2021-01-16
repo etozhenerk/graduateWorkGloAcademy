@@ -5,19 +5,31 @@ const togglePopUp = () => {
     modalCallback = document.querySelector(".modal-callback"),
     body = document.querySelector("body");
 
+    const openPopup = () => {
+      modalOverlay.style.display = "block";
+      modalCallback.style.display = "block";
+    };
+
+    const closePopup = () => {
+      modalOverlay.style.display = "none";
+      modalCallback.style.display = "none";
+    };
+
   callbackBtn.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
-      modalOverlay.style.display = "block";
-      modalCallback.style.display = "block";
+      openPopup();
     });
   });
 
   body.addEventListener("click", (e) => {
     const target = e.target;
     if (target.closest(".modal-close") || target.matches(".modal-overlay")) {
-      modalOverlay.style.display = "none";
-      modalCallback.style.display = "none";
+      closePopup();
+    }
+    if(target.closest('.services-elements .element')){
+      e.preventDefault();
+      openPopup();
     }
   });
 };
