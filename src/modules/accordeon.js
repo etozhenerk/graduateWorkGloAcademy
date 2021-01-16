@@ -3,8 +3,6 @@ const accordeon = () => {
   elements = accordeonBlock.querySelectorAll('.element'),
   elementsContent = accordeonBlock.querySelectorAll('.element-content');
 
-  console.log(elementsContent);
-
   accordeonBlock.addEventListener('click', e => {
     const target = e.target,
     parent = target.closest('.element');
