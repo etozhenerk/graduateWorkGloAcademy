@@ -2,11 +2,13 @@
 import togglePopUp from './modules/togglePopUp';
 import animateTopMenu from './modules/topMenu';
 import slider from './modules/slider';
+import accordeon from './modules/accordeon';
 import servicesCarousel from './modules/servicesCarousel';
 
 togglePopUp();
 animateTopMenu();
 slider();
+accordeon();
 
 
 const options = {

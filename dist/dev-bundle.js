@@ -38,7 +38,18 @@ eval("\nmodule.exports = function () {\n\treturn /[\\u001b\\u009b][[()#;?]*(?:[0
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_togglePopUp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/togglePopUp */ \"./src/modules/togglePopUp.js\");\n/* harmony import */ var _modules_topMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/topMenu */ \"./src/modules/topMenu.js\");\n/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/slider */ \"./src/modules/slider.js\");\n/* harmony import */ var _modules_servicesCarousel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/servicesCarousel */ \"./src/modules/servicesCarousel.js\");\n\n\n\n\n\n\n(0,_modules_togglePopUp__WEBPACK_IMPORTED_MODULE_0__.default)();\n(0,_modules_topMenu__WEBPACK_IMPORTED_MODULE_1__.default)();\n(0,_modules_slider__WEBPACK_IMPORTED_MODULE_2__.default)();\nvar options = {\n  main: '.services-elements',\n  wrap: '.services-carousel',\n  prev: '.arrow-left',\n  next: '.arrow-right',\n  slidesToShow: 3,\n  infinity: true,\n  responsive: [{\n    breakpoint: 1024,\n    slideToShow: 2\n  }, {\n    breakpoint: 576,\n    slideToShow: 1\n  }]\n};\nvar carousel = new _modules_servicesCarousel__WEBPACK_IMPORTED_MODULE_3__.default(options);\ncarousel.init();\n\n//# sourceURL=webpack://graduateWork/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_togglePopUp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/togglePopUp */ \"./src/modules/togglePopUp.js\");\n/* harmony import */ var _modules_topMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/topMenu */ \"./src/modules/topMenu.js\");\n/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/slider */ \"./src/modules/slider.js\");\n/* harmony import */ var _modules_accordeon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/accordeon */ \"./src/modules/accordeon.js\");\n/* harmony import */ var _modules_servicesCarousel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/servicesCarousel */ \"./src/modules/servicesCarousel.js\");\n\n\n\n\n\n\n\n(0,_modules_togglePopUp__WEBPACK_IMPORTED_MODULE_0__.default)();\n(0,_modules_topMenu__WEBPACK_IMPORTED_MODULE_1__.default)();\n(0,_modules_slider__WEBPACK_IMPORTED_MODULE_2__.default)();\n(0,_modules_accordeon__WEBPACK_IMPORTED_MODULE_3__.default)();\nvar options = {\n  main: '.services-elements',\n  wrap: '.services-carousel',\n  prev: '.arrow-left',\n  next: '.arrow-right',\n  slidesToShow: 3,\n  infinity: true,\n  responsive: [{\n    breakpoint: 1024,\n    slideToShow: 2\n  }, {\n    breakpoint: 576,\n    slideToShow: 1\n  }]\n};\nvar carousel = new _modules_servicesCarousel__WEBPACK_IMPORTED_MODULE_4__.default(options);\ncarousel.init();\n\n//# sourceURL=webpack://graduateWork/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/modules/accordeon.js":
+/*!**********************************!*\
+  !*** ./src/modules/accordeon.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\nvar accordeon = function accordeon() {\n  var accordeonBlock = document.querySelector('.accordeon'),\n      elements = accordeonBlock.querySelectorAll('.element'),\n      elementsContent = accordeonBlock.querySelectorAll('.element-content');\n  console.log(elementsContent);\n  accordeonBlock.addEventListener('click', function (e) {\n    var target = e.target,\n        parent = target.closest('.element');\n\n    if (parent) {\n      elements.forEach(function (elem, i) {\n        elem.classList.remove('active');\n        elementsContent[i].style.display = 'none';\n\n        if (elem === parent) {\n          elem.classList.add('active');\n          elementsContent[i].style.display = 'block';\n        }\n      });\n    }\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (accordeon);\n\n//# sourceURL=webpack://graduateWork/./src/modules/accordeon.js?");
 
 /***/ }),
 
@@ -477,7 +488,7 @@ eval("var map = {\n\t\"./log\": \"./node_modules/webpack/hot/log.js\"\n};\n\n\nf
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => "dae7b326cbc735283970"
+/******/ 		__webpack_require__.h = () => "8eb63fc7a7603ef93ddc"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
