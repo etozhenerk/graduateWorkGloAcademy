@@ -71,7 +71,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\nvar togglePopUp = function togglePopUp() {\n  var callbackBtn = document.querySelectorAll(\".callback-btn\"),\n      modalOverlay = document.querySelector(\".modal-overlay\"),\n      modalCallback = document.querySelector(\".modal-callback\"),\n      body = document.querySelector(\"body\");\n\n  var openPopup = function openPopup() {\n    modalOverlay.style.display = \"block\";\n    modalCallback.style.display = \"block\";\n  };\n\n  var closePopup = function closePopup() {\n    modalOverlay.style.display = \"none\";\n    modalCallback.style.display = \"none\";\n  };\n\n  callbackBtn.forEach(function (btn) {\n    btn.addEventListener(\"click\", function (e) {\n      e.preventDefault();\n      openPopup();\n    });\n  });\n  body.addEventListener(\"click\", function (e) {\n    var target = e.target;\n\n    if (target.closest(\".modal-close\") || target.matches(\".modal-overlay\")) {\n      closePopup();\n    }\n\n    if (target.closest('.services-elements .element')) {\n      e.preventDefault();\n      openPopup();\n    }\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (togglePopUp);\n\n//# sourceURL=webpack://graduateWork/./src/modules/togglePopUp.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\nvar togglePopUp = function togglePopUp() {\n  var modalOverlay = document.querySelector(\".modal-overlay\"),\n      modalCallback = document.querySelector(\".modal-callback\"),\n      body = document.querySelector(\"body\");\n\n  var openPopup = function openPopup() {\n    modalOverlay.style.display = \"block\";\n    modalCallback.style.display = \"block\";\n  };\n\n  var closePopup = function closePopup() {\n    modalOverlay.style.display = \"none\";\n    modalCallback.style.display = \"none\";\n  };\n\n  body.addEventListener(\"click\", function (e) {\n    var target = e.target;\n\n    if (target.closest(\".modal-close\") || target.matches(\".modal-overlay\")) {\n      closePopup();\n    }\n\n    if (target.closest(\".services-elements .element\") || target.matches(\".button-services\") || target.matches(\".callback-btn\")) {\n      e.preventDefault();\n      openPopup();\n    }\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (togglePopUp);\n\n//# sourceURL=webpack://graduateWork/./src/modules/togglePopUp.js?");
 
 /***/ }),
 
@@ -477,7 +477,7 @@ eval("var map = {\n\t\"./log\": \"./node_modules/webpack/hot/log.js\"\n};\n\n\nf
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => "55840a91f6f411df3744"
+/******/ 		__webpack_require__.h = () => "dae7b326cbc735283970"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
