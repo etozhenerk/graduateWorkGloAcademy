@@ -5,6 +5,7 @@ import slider from './modules/slider';
 import accordeon from './modules/accordeon';
 import servicesCarousel from './modules/servicesCarousel';
 import upButton from './modules/upButton';
+import Validator from './modules/validator';
 
 togglePopUp();
 animateTopMenu();
@@ -33,3 +34,22 @@ const options = {
 const carousel = new servicesCarousel(options);
 
 carousel.init();
+
+const validForm = new Validator({
+  selector: "form[name=form-callback]",
+  pattern: {
+    name: /^[а-я]+$/i
+  },
+  method: {
+    'form-tel': [
+      ['notEmpty'],
+      ['pattern', 'phone']
+    ],
+    'form-name': [
+      ['notEmpty'],
+      ['pattern', 'name']
+    ]
+  }
+});
+
+validForm.init();
