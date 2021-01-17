@@ -49,7 +49,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _mod
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\nvar accordeon = function accordeon() {\n  var accordeonBlock = document.querySelector('.accordeon'),\n      elements = accordeonBlock.querySelectorAll('.element'),\n      elementsContent = accordeonBlock.querySelectorAll('.element-content');\n  accordeonBlock.addEventListener('click', function (e) {\n    var target = e.target,\n        parent = target.closest('.element');\n\n    if (parent) {\n      elements.forEach(function (elem, i) {\n        elem.classList.remove('active');\n        elementsContent[i].style.display = 'none';\n\n        if (elem === parent) {\n          elem.classList.add('active');\n          elementsContent[i].style.display = 'block';\n        }\n      });\n    }\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (accordeon);\n\n//# sourceURL=webpack://graduateWork/./src/modules/accordeon.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\nvar accordeon = function accordeon() {\n  var accordeonBlock = document.querySelector(\".accordeon\"),\n      elements = accordeonBlock.querySelectorAll(\".element\"),\n      elementsContent = accordeonBlock.querySelectorAll(\".element-content\");\n  accordeonBlock.addEventListener(\"click\", function (e) {\n    var target = e.target,\n        parent = target.closest(\".element\");\n\n    if (parent) {\n      if (parent.classList.contains(\"active\")) {\n        parent.classList.remove(\"active\");\n        parent.querySelector('.element-content').style.display = \"none\";\n      } else {\n        elements.forEach(function (elem, i) {\n          elem.classList.remove(\"active\");\n          elementsContent[i].style.display = \"none\";\n\n          if (elem === parent) {\n            elem.classList.add(\"active\");\n            elementsContent[i].style.display = \"block\";\n          }\n        });\n      }\n    }\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (accordeon);\n\n//# sourceURL=webpack://graduateWork/./src/modules/accordeon.js?");
 
 /***/ }),
 
@@ -499,7 +499,7 @@ eval("var map = {\n\t\"./log\": \"./node_modules/webpack/hot/log.js\"\n};\n\n\nf
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => "f7d0cb5731164b7b3c53"
+/******/ 		__webpack_require__.h = () => "85b55effa16566ccdf8f"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

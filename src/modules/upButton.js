@@ -6,7 +6,7 @@ const upButton = () => {
       block: "start",
     });
   });
-  window.addEventListener('scroll', function() {
+  window.addEventListener('scroll', () => {
     if(pageYOffset < 600){
       up.style.display = "none";
     }else{
