@@ -37,6 +37,8 @@ carousel.init();
 
 const validForm = new Validator({
   selector: "form[name=form-callback]",
+  popupSelector: ".modal-callback",
+  overlay: ".modal-overlay",
   pattern: {
     name: /^[а-я]+$/i
   },

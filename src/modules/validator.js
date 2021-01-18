@@ -1,10 +1,16 @@
 class Validator {
-  constructor({ selector, pattern = {}, method }) {
+  constructor({ selector, popupSelector, overlay, pattern = {}, method }) {
     this.form = document.querySelector(selector);
+    this.popup = document.querySelector(popupSelector);
+    this.overlay = document.querySelector(overlay);
     this.pattern = pattern;
     this.method = method;
     this.elementsForm = [...this.form.elements].filter((item) => {
-      return item.tagName.toLowerCase() !== "button" && item.type !== "button" && item.type !== "submit";
+      return (
+        item.tagName.toLowerCase() !== "button" &&
+        item.type !== "button" &&
+        item.type !== "submit"
+      );
     });
     this.error = new Set();
   }
@@ -43,7 +49,10 @@ class Validator {
         this.elementsForm.forEach((elem) => {
           elem.value = "";
         });
-       
+        setTimeout(() => {
+          this.overlay.style.display = "none";
+          this.popup.style.display = "none";
+        }, 8000);
       }
     });
   }
@@ -62,6 +71,7 @@ class Validator {
       this.form.lastChild.textContent = message;
       setTimeout(() => {
         this.form.lastChild.remove();
+        this.elementsForm.forEach((elem) => elem.classList.remove("seccess"));
       }, 5000);
     } else {
       const statusMessage = document.createElement("div");
@@ -73,9 +83,6 @@ class Validator {
       this.form.appendChild(statusMessage);
       statusMessage.textContent = message;
     }
-
-    
-
   }
   isValid(elem) {
     const validatorMethod = {
@@ -170,6 +177,5 @@ class Validator {
     }
   }
 }
-
 
 export default Validator;
