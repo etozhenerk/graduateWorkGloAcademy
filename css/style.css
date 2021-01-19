@@ -457,6 +457,7 @@ a.absolute {
 .mobile-menu-close.close {
 	top: 25px;
 	right: 25px;
+	cursor: pointer;
 }
 .callback-btn {
 	padding: 0 30px;
