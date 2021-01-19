@@ -6,12 +6,14 @@ import accordeon from './modules/accordeon';
 import servicesCarousel from './modules/servicesCarousel';
 import upButton from './modules/upButton';
 import Validator from './modules/validator';
+import toggleMenu from './modules/toggleMenu';
 
 togglePopUp();
 animateTopMenu();
 slider();
 accordeon();
 upButton();
+toggleMenu();
 
 
 const options = {

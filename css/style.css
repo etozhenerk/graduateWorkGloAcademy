@@ -397,6 +397,7 @@ a.absolute {
 }
 .mob-menu-btn {
 	margin: 24px 5px 0 20px;
+	cursor: pointer;
 }
 .mob-menu-btn span {
 	display: block;
@@ -655,7 +656,7 @@ a.absolute {
 	line-height: 1;
 	font-weight: bold;
 	color: #e9bb26;
-	opacity: 0;
+	opacity: 1;
 }
 .num-section .num.animated {
 	opacity: 1;

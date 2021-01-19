@@ -1,5 +1,8 @@
 const upButton = () => {
   const up = document.querySelector('.up');
+
+  up.style.display = "none";
+
   up.addEventListener('click', () => {
     document.querySelector('body').scrollIntoView({
       behavior: "smooth",
