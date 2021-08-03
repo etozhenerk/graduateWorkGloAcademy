@@ -30,17 +30,88 @@ class Validator {
       if (!this.error.size) {
         this.sendForm("Загрузка...");
         const formData = new FormData(this.form);
-        let body = {};
-
+        const contactData = {};
         formData.forEach((val, key) => {
-          body[key] = val;
+          contactData[key] = val;
         });
-        this.postData(body)
+        const url = "https://etozhenerkv14.amocrm.ru/api/v4/leads/complex";
+        const body = [
+          {
+            name: "Заявка с сайта",
+            _embedded: {
+              contacts: [
+                {
+                  first_name: `${contactData.firstname}`,
+                  last_name: `${contactData.surname}`,
+                  responsible_user_id: 6640342,
+                  custom_fields_values: [
+                    {
+                      field_id: 670587,
+                      values: [
+                        {
+                          enum_id: 984107,
+                          value: `${contactData.email}`,
+                        },
+                      ],
+                    },
+                    {
+                      field_id: 670585,
+                      values: [
+                        {
+                          enum_id: 984095,
+                          value: `${contactData.tel}`,
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            responsible_user_id: 6640342,
+            custom_fields_values: [
+              {
+                field_id: 1170789,
+                values: [
+                  {
+                    value: "Поле текст",
+                  },
+                ],
+              },
+            ],
+            status_id: 40243642,
+            pipeline_id: 3870481,
+            request_id: "qweasd",
+          },
+        ];
+
+        this.postData(url, body)
           .then((response) => {
             if (response.status !== 200) {
               throw new Error("status network not 200");
             }
             this.sendForm("Спасибо! Мы скоро с вами свяжемся!");
+            return response.json();
+          })
+          .then((data) => {
+            const url = "https://etozhenerkv14.amocrm.ru/api/v4/tasks";
+            const body = [
+              {
+                task_type_id: 1,
+                text: `Связаться с клиентом ${contactData.firstname} ${contactData.surname} по номеру ${contactData.tel}`,
+                complete_till: Math.floor(Date.now() / 1000) + 14400,
+                entity_id: data[0].contact_id,
+                entity_type: "contacts",
+                request_id: "example",
+              },
+            ];
+
+            this.postData(url, body)
+              .then((response) => {
+                if (response.status !== 200) {
+                  throw new Error("status network not 200");
+                }
+              })
+              .catch((err) => console.log(err));
           })
           .catch((error) => {
             this.sendForm("Что-то пошло не так...");
@@ -57,11 +128,13 @@ class Validator {
     });
   }
 
-  postData(body) {
-    return fetch("./server.php", {
+  postData(url, body) {
+    return fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization:
+          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijc0NGNmZDBhOWZlMDc1MGRhZjExODFiZDI5Y2IzODBkMjdiZDI3NzdmYTFmZGVkNWY3YTE3OGM4MWZiMDI2NmVjNTExOWMxM2UzYjdjMDQ3In0.eyJhdWQiOiI2ZWM3ZTA1MC02MDQ3LTRhM2EtYmU3Ni1lODU0ODVlYzljMmIiLCJqdGkiOiI3NDRjZmQwYTlmZTA3NTBkYWYxMTgxYmQyOWNiMzgwZDI3YmQyNzc3ZmExZmRlZDVmN2ExNzhjODFmYjAyNjZlYzUxMTljMTNlM2I3YzA0NyIsImlhdCI6MTYyNzk5MTE1NywibmJmIjoxNjI3OTkxMTU3LCJleHAiOjE2MjgwNzc1NTcsInN1YiI6IjY2NDAzNDIiLCJhY2NvdW50X2lkIjoyOTIyMzI3Nywic2NvcGVzIjpbInB1c2hfbm90aWZpY2F0aW9ucyIsImNybSIsIm5vdGlmaWNhdGlvbnMiXX0.OwLyYD0N5jqfkph4HjWzUFLrEHIWf2pe2zwX_4N6GYZ0_8EXTraFEddbGvYggzHXNPZPElPOb8AfhvZkEPAkfnzLhZvPI3VsnzJbij1BEEnRWoNqD30JQw5YayfeRzfalEzaZ6caHw90dM865RyVkG-XFhwQsGW-ohvVczZBgo8iLm6NEnYy-KBbAbd9snvE4avOlFUSYbdxPW9ujEbIoamV9TtJc-l9ph_RdyaTCJkNwpW2Bo6f96lOZykboIAQwjlWUFp8sgoVOx_Zw_veTtID9QTeMyd8Jqms8ATX0dw4hnI9oP7dPsL4koxRTIm2TSKgSxppdoIpRLcU5h-5HQ",
       },
       body: JSON.stringify(body),
     });

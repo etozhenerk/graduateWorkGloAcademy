@@ -49,7 +49,15 @@ const validForm = new Validator({
       ['notEmpty'],
       ['pattern', 'phone']
     ],
-    'form-name': [
+    'form-email': [
+      ['notEmpty'],
+      ['pattern', 'email']
+    ],
+    'form-firstname': [
+      ['notEmpty'],
+      ['pattern', 'name']
+    ],
+    'form-surname': [
       ['notEmpty'],
       ['pattern', 'name']
     ]
