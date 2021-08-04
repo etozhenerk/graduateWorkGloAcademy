@@ -12,6 +12,7 @@ class Validator {
         item.type !== "submit"
       );
     });
+    this.oauthData = JSON.parse(localStorage.getItem("oauthData"));
     this.error = new Set();
   }
 
@@ -34,57 +35,63 @@ class Validator {
         formData.forEach((val, key) => {
           contactData[key] = val;
         });
-        const url = "https://etozhenerkv14.amocrm.ru/api/v4/leads/complex";
-        const body = [
-          {
-            name: "Заявка с сайта",
-            _embedded: {
-              contacts: [
-                {
-                  first_name: `${contactData.firstname}`,
-                  last_name: `${contactData.surname}`,
-                  responsible_user_id: 6640342,
-                  custom_fields_values: [
+        const url = "https://etozhenerkv14.amocrm.ru/oauth2/access_token";
+        const body = {
+          client_id: "6ec7e050-6047-4a3a-be76-e85485ec9c2b",
+          client_secret:
+            "R0Uky8HzMxUSY6y4kv0YN3N5KZqnmDzcCwbfXskJjNmyupJDrbG9jHWp7HCuECA9",
+          grant_type: "refresh_token",
+          refresh_token: this.oauthData.refresh_token,
+          redirect_uri: "https://google.com",
+        };
+
+        this.postData(url, body)
+          .then((response) => response.json())
+          .then((data) => {
+            this.oauthData = data;
+            localStorage.setItem("oauthData", JSON.stringify(data));
+          })
+          .then(() => {
+            const url = "https://etozhenerkv14.amocrm.ru/api/v4/leads/complex";
+            const body = [
+              {
+                name: "Заявка с сайта",
+                _embedded: {
+                  contacts: [
                     {
-                      field_id: 670587,
-                      values: [
+                      first_name: `${contactData.firstname}`,
+                      last_name: `${contactData.surname}`,
+                      responsible_user_id: 6640342,
+                      custom_fields_values: [
                         {
-                          enum_id: 984107,
-                          value: `${contactData.email}`,
+                          field_id: 670587,
+                          values: [
+                            {
+                              enum_id: 984107,
+                              value: `${contactData.email}`,
+                            },
+                          ],
                         },
-                      ],
-                    },
-                    {
-                      field_id: 670585,
-                      values: [
                         {
-                          enum_id: 984095,
-                          value: `${contactData.tel}`,
+                          field_id: 670585,
+                          values: [
+                            {
+                              enum_id: 984095,
+                              value: `${contactData.tel}`,
+                            },
+                          ],
                         },
                       ],
                     },
                   ],
                 },
-              ],
-            },
-            responsible_user_id: 6640342,
-            custom_fields_values: [
-              {
-                field_id: 1170789,
-                values: [
-                  {
-                    value: "Поле текст",
-                  },
-                ],
+                responsible_user_id: 6640342,
+                status_id: 40243642,
+                pipeline_id: 3870481,
               },
-            ],
-            status_id: 40243642,
-            pipeline_id: 3870481,
-            request_id: "qweasd",
-          },
-        ];
-
-        this.postData(url, body)
+            ];
+            return this.postData(url, body, this.oauthData.access_token);
+          })
           .then((response) => {
             if (response.status !== 200) {
               throw new Error("status network not 200");
@@ -93,19 +100,49 @@ class Validator {
             return response.json();
           })
           .then((data) => {
-            const url = "https://etozhenerkv14.amocrm.ru/api/v4/tasks";
-            const body = [
+            const urlTask = "https://etozhenerkv14.amocrm.ru/api/v4/tasks";
+            const dateNow = new Date();
+            if (dateNow.getHours >= 18) {
+              dateNow.setHours(9);
+            }
+            const completeTill = Math.floor(+dateNow + 345600000 / 1000);
+            const bodyTask = [
               {
                 task_type_id: 1,
                 text: `Связаться с клиентом ${contactData.firstname} ${contactData.surname} по номеру ${contactData.tel}`,
-                complete_till: Math.floor(Date.now() / 1000) + 14400,
+                complete_till: completeTill,
                 entity_id: data[0].contact_id,
                 entity_type: "contacts",
                 request_id: "example",
               },
             ];
 
-            this.postData(url, body)
+            const nameProduct = this.popup.dataset.application;
+            if(nameProduct){
+              const urlProduct = `https://etozhenerkv14.amocrm.ru/api/v4/leads/${data[0].id}/link`;
+              const bodyProduct = [
+                {
+                  to_entity_id: nameProduct === "Монтаж или замена электропроводки" ? 3248443 : 3248441,
+                  to_entity_type: "catalog_elements",
+                  metadata: {
+                    quantity: 1,
+                    catalog_id: 15211,
+                  },
+                },
+              ];
+
+              this.postData(urlProduct, bodyProduct, this.oauthData.access_token)
+              .then((response) => {
+                if (response.status !== 200) {
+                  throw new Error("status network not 200");
+                }
+              })
+              .catch((err) => console.log(err));
+            }
+            
+
+
+            this.postData(urlTask, bodyTask, this.oauthData.access_token)
               .then((response) => {
                 if (response.status !== 200) {
                   throw new Error("status network not 200");
@@ -123,21 +160,30 @@ class Validator {
         setTimeout(() => {
           this.overlay.style.display = "none";
           this.popup.style.display = "none";
-        }, 8000);
+        }, 4000);
       }
     });
   }
 
-  postData(url, body) {
-    return fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization:
-          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijc0NGNmZDBhOWZlMDc1MGRhZjExODFiZDI5Y2IzODBkMjdiZDI3NzdmYTFmZGVkNWY3YTE3OGM4MWZiMDI2NmVjNTExOWMxM2UzYjdjMDQ3In0.eyJhdWQiOiI2ZWM3ZTA1MC02MDQ3LTRhM2EtYmU3Ni1lODU0ODVlYzljMmIiLCJqdGkiOiI3NDRjZmQwYTlmZTA3NTBkYWYxMTgxYmQyOWNiMzgwZDI3YmQyNzc3ZmExZmRlZDVmN2ExNzhjODFmYjAyNjZlYzUxMTljMTNlM2I3YzA0NyIsImlhdCI6MTYyNzk5MTE1NywibmJmIjoxNjI3OTkxMTU3LCJleHAiOjE2MjgwNzc1NTcsInN1YiI6IjY2NDAzNDIiLCJhY2NvdW50X2lkIjoyOTIyMzI3Nywic2NvcGVzIjpbInB1c2hfbm90aWZpY2F0aW9ucyIsImNybSIsIm5vdGlmaWNhdGlvbnMiXX0.OwLyYD0N5jqfkph4HjWzUFLrEHIWf2pe2zwX_4N6GYZ0_8EXTraFEddbGvYggzHXNPZPElPOb8AfhvZkEPAkfnzLhZvPI3VsnzJbij1BEEnRWoNqD30JQw5YayfeRzfalEzaZ6caHw90dM865RyVkG-XFhwQsGW-ohvVczZBgo8iLm6NEnYy-KBbAbd9snvE4avOlFUSYbdxPW9ujEbIoamV9TtJc-l9ph_RdyaTCJkNwpW2Bo6f96lOZykboIAQwjlWUFp8sgoVOx_Zw_veTtID9QTeMyd8Jqms8ATX0dw4hnI9oP7dPsL4koxRTIm2TSKgSxppdoIpRLcU5h-5HQ",
-      },
-      body: JSON.stringify(body),
-    });
+  postData(url, body, token) {
+    if (token) {
+      return fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(body),
+      });
+    } else {
+      return fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+    }
   }
   sendForm(message) {
     if (this.form.lastElementChild.classList.contains("statusMessage")) {
@@ -145,7 +191,7 @@ class Validator {
       setTimeout(() => {
         this.form.lastChild.remove();
         this.elementsForm.forEach((elem) => elem.classList.remove("seccess"));
-      }, 5000);
+      }, 4000);
     } else {
       const statusMessage = document.createElement("div");
       statusMessage.classList.add("statusMessage");
