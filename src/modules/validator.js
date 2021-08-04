@@ -105,7 +105,7 @@ class Validator {
             if (dateNow.getHours >= 18) {
               dateNow.setHours(9);
             }
-            const completeTill = Math.floor(+dateNow + 345600000 / 1000);
+            const completeTill = Math.floor((+dateNow + 345600000 )/ 1000);
             const bodyTask = [
               {
                 task_type_id: 1,
