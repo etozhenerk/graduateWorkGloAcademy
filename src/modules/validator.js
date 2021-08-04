@@ -12,14 +12,7 @@ class Validator {
         item.type !== "submit"
       );
     });
-    this.oauthData = JSON.parse(localStorage.getItem("oauthData")) || {
-      access_token:
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijk0Y2NiYzEzZTA5NzQ3ZDZiNzI0ZmNiOTdiMWNkODU4MTE5MzQ3YzQ4MzVjOTU1NGZmMjgxYTAyMDE1ZmNlM2Q4ZDUyNWI0ZjRiNmQxNDVjIn0.eyJhdWQiOiI2ZWM3ZTA1MC02MDQ3LTRhM2EtYmU3Ni1lODU0ODVlYzljMmIiLCJqdGkiOiI5NGNjYmMxM2UwOTc0N2Q2YjcyNGZjYjk3YjFjZDg1ODExOTM0N2M0ODM1Yzk1NTRmZjI4MWEwMjAxNWZjZTNkOGQ1MjViNGY0YjZkMTQ1YyIsImlhdCI6MTYyODA3MTEzOSwibmJmIjoxNjI4MDcxMTM5LCJleHAiOjE2MjgxNTc1MzksInN1YiI6IjY2NDAzNDIiLCJhY2NvdW50X2lkIjoyOTIyMzI3Nywic2NvcGVzIjpbInB1c2hfbm90aWZpY2F0aW9ucyIsImNybSIsIm5vdGlmaWNhdGlvbnMiXX0.S7rTpi6UaDCYPe6W9xZlGAv6zjezYMju1Jk9n_u4ihXpKhp5H3kgWo2NYWfioFVrpwzNzP9MNyoG13LkRKPG1W26B_FsOQzPUj8ope6u0FRsWuA6ltmTWxpun-zciSTFw8YU5wILlqMQd6_Q4cNfSfJv4PXUg6MPu2f-zpg7FUv4lpiSIQk8W6XMmRduUxd_n17n1hVtwKQSB_1YYye2IZ71wlCvKuOf6I7tiDjMq_LFUaSTpsJ-dEkCkdAI7du1o-Tr9RHQzMa01PJMBW6Ka3lUn7SFhXTTQa13i4hiRSMw_iw7uIdrNO2PCVL4T9ugxbxLODxBh_qLjt3wwhWnTw",
-      expires_in: 86400,
-      refresh_token:
-        "def502001899bb7a85f842ffd9cc70eb00c0e40686f4b264047c15f023d28343629bff906b1deb9c528777bf168b7ba14df8cf738f24be6befe331720b755ab57fb75887b5355826469b2e3c949698b36cb51bee3c2e8e65fae80ceedff155719147154dc909796c28fe785fbe16c01b8a13e39c9f8cb080f7078cade719dcc4bf0652625a73bb8aae5039c963beaabc34044175c5241ec1331a19ee8faaeb20bc661b337ff57ff1e09129ac0826b7d70b1646c9830d21709588ac87f5594bf2822ec5103c97f0e392e9ca6559848fe2652c72e11dbf3b55268ec357d4d5b5f81fe63ea7f080b1c8bb5135ed0e346a2f1c7121fa18bab659683950e6819623d2e8f75d1c608dbe79a37e4a793a49004017c8c8e0146a3a90cf1a4c96838fa83ce29702c60118efdfc266ac8a8ea17a6bbe70fb194df720e523a6e53eeae152ac27167b2417a271db2d60d00435754e0f0c172b7941948ff8cca8d9c196deb9c68e064ee845bde46c6e453fab4a3b242534480386cb7b8e8a6b27ce4e37c51dc75df30a356259f1bd81beab9ed072ae13c1db973693f0a9254583bfb03e059d78bc471793da6eebefb22ffebee87caa8f867a93f5158d7c3cbbad78d4922e8597f6f083b7fc74184914f9",
-      token_type: "Bearer",
-    };
+    this.oauthData = JSON.parse(localStorage.getItem("oauthData"));
     this.error = new Set();
   }
 
@@ -299,7 +292,7 @@ class Validator {
       this.pattern.phone = /^\+?[78]([-()]*\d){10}$/;
     }
     if (!this.pattern.email) {
-      this.pattern.email = /^\w+@\w+\.\w{2,}$/;
+      this.pattern.email = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
     }
   }
 }

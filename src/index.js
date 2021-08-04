@@ -42,7 +42,7 @@ const validForm = new Validator({
   popupSelector: ".modal-callback",
   overlay: ".modal-overlay",
   pattern: {
-    name: /^[а-я]+$/i
+    name: /^[а-яa-z]+$/i
   },
   method: {
     'form-tel': [
