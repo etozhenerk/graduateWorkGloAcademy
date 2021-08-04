@@ -117,12 +117,12 @@ class Validator {
               },
             ];
 
-            const nameProduct = this.popup.dataset.application;
-            if(nameProduct){
+            const productId = +this.popup.dataset.id;
+            if(productId){
               const urlProduct = `https://etozhenerkv14.amocrm.ru/api/v4/leads/${data[0].id}/link`;
               const bodyProduct = [
                 {
-                  to_entity_id: nameProduct === "Монтаж или замена электропроводки" ? 3248443 : 3248441,
+                  to_entity_id: productId,
                   to_entity_type: "catalog_elements",
                   metadata: {
                     quantity: 1,

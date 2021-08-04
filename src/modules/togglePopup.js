@@ -4,7 +4,7 @@ const togglePopUp = () => {
     body = document.querySelector("body");
 
   const openPopup = (data) => {
-    modalCallback.dataset.application = data;
+    modalCallback.dataset.id = data;
     modalOverlay.style.display = "block";
     modalCallback.style.display = "block";
   };
@@ -25,7 +25,7 @@ const togglePopUp = () => {
       target.matches(".callback-btn")
     ) {
       e.preventDefault();
-      openPopup(target.dataset.application);
+      openPopup(target.dataset.id);
     }
   });
 };
